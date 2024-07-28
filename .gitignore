@@ -1,28 +1,6 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
-*~
-*.sw[mnpcod]
-.tmp
-*.tmp
-*.tmp.*
-UserInterfaceState.xcuserstate
-$RECYCLE.BIN/
-
-*.log
-log.txt
-
-
-/.sourcemaps
-/.versions
-/coverage
-
-# Ionic
-/.ionic
-/www
-/platforms
-/plugins
-
 # Compiled output
 /dist
 /tmp
@@ -41,7 +19,6 @@ yarn-error.log
 .c9/
 *.launch
 .settings/
-*.sublime-project
 *.sublime-workspace
 
 # Visual Studio Code
@@ -52,13 +29,9 @@ yarn-error.log
 !.vscode/extensions.json
 .history/*
 
-
 # Miscellaneous
-/.angular
 /.angular/cache
 .sass-cache/
-/.nx
-/.nx/cache
 /connect.lock
 /coverage
 /libpeerconnection.log
@@ -68,3 +41,63 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Ionic specific
+*.log
+*.tmp
+*.tmp.*
+log.txt
+*.sublime-project
+*.sublime-workspace
+.vscode/
+npm-debug.log*
+
+.ionic/
+.sourcemaps/
+.sass-cache/
+.tmp/
+.versions/
+coverage/
+www/
+dist/
+node_modules/
+tmp/
+temp/
+platforms/
+plugins/
+plugins/android.json
+plugins/ios.json
+$RECYCLE.BIN/
+
+# Cordova plugins for Capacitor
+capacitor-cordova-android-plugins
+
+# Copied web assets
+android/app/src/main/assets/public
+ios/App/public
+
+# Firebase
+.firebase/
+.firebaserc
+firebase-debug.log
+
+# Environment Variables
+.env
+.env.*
+!.env.example
+
+# Build files
+*.apk
+*.aab
+*.ipa
+
+# Keystore files
+*.jks
+*.keystore
+
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties

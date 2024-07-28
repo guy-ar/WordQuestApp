@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>game</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">game</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="game-screen">
+    <div class="top-bar">
+      <span>ניקוד: {{score}}</span>
+      <span>רמה: {{level}}</span>
+      <span>הצלחות ברצף: {{getStreakEmoji()}}</span>
+    </div>
+
+    <div *ngIf="currentWord" class="word-container">
+      <h2>{{currentWord.englishWord}}</h2>
+      <ion-button fill="clear">
+        <ion-icon name="volume-high-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div *ngIf="!showFeedback" class="options-container">
+      <ion-button *ngFor="let option of options" 
+        (click)="checkAnswer(option)"
+        [disabled]="showFeedback">
+        {{option.hebrew}}
+      </ion-button>
+    </div>
+    <ion-text *ngIf="showFeedback" [color]="isCorrect ? 'success' : 'danger'">
+      <p>{{ feedbackMessage }}</p>
+    </ion-text>
+    <!-- <h2 *ngIf="showFeedback" [ngClass]="{'correct': isCorrect, 'incorrect': !isCorrect}">
+      {{ feedbackMessage }}
+    </h2> -->
+    <ion-button (click)="resetGame()">התחל מחדש</ion-button>
+    <ion-progress-bar [value]="progress"></ion-progress-bar>
+  </div>
+
+</ion-content>
+

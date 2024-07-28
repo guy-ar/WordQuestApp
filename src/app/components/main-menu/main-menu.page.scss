@@ -1,0 +1,46 @@
+.main-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: linear-gradient(to bottom, #87CEEB, #4682B4);
+  
+    .logo {
+      font-size: 48px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+  
+    .logo-hebrew {
+      font-size: 36px;
+      color: white;
+      margin-bottom: 50px;
+    }
+  
+    ion-button {
+      --background: #4CAF50;
+      --border-radius: 30px;
+      margin-bottom: 20px;
+    }
+  
+    .bottom-buttons {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+  
+      ion-button {
+        --background: #3498db;
+        margin: 0 10px;
+      }
+    }
+  
+    .mascot {
+      width: 100px;
+      height: 100px;
+      background-color: gray; // Placeholder for mascot image
+      margin-top: 50px;
+      border-radius: 50%;
+    }
+  }

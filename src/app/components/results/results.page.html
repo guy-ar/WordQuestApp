@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>תוצאות</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">results</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="results-screen">
+    <h1>🎉 רמה הסתיימה ! 🎉</h1>
+    
+    <h2>ניקוד סופי: {{score}}</h2>
+    
+    <div class="stars-container">
+      <span *ngFor="let star of stars" [class.filled]="star">⭐</span>
+    </div>
+    
+    <div class="button-container">
+      <ion-button (click)="navigateToGame()">רמה הבאה</ion-button>
+      <ion-button (click)="navigateToGame()">משחק חוזר</ion-button>
+    </div>
+    
+    <ion-button (click)="navigateToMainMenu()" fill="clear">תפריט ראשי</ion-button>
+  </div>
+</ion-content>
+

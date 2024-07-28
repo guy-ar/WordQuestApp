@@ -1,0 +1,98 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+import { AddWordResponse, Word, WordList } from 'src/app/model/words.model';
+import { environment } from 'src/environments/environment';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class WordsService {
+  private wordList: Word[] = [];
+  private knownWords: Set<string> = new Set();
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' })
+
+  private addWordDetails$ = new Subject<AddWordResponse | null>();
+  public onAddWordDetails$ = this.addWordDetails$.asObservable();
+
+  constructor(private http: HttpClient) {
+    this.loadWords();
+  }
+
+  private loadWords() {
+    this.http.get<WordList>('assets/json/wordsList.json').subscribe(
+      data => this.wordList = data.words,
+      error => console.error('Error loading word list:', error)
+    );
+  }
+
+  addWord(newWord: {
+    englishWord: string;
+    translations: { hebrew: string; isCorrect: boolean }[];
+    difficulty: number;
+    category: string;
+  }) {
+    const options = {
+      headers: this.headers
+    }
+
+    this.wordList.push(newWord);
+
+    // Here you would typically save the updated word list to your backend or local storage
+    // For this example, we'll just log it to the console
+    console.log('Updated word list:', this.wordList);
+    
+    return this.http.post<AddWordResponse>(environment.apiUrl + '/add', newWord, options)
+    .pipe(
+      tap(data => {
+        if (!data?.success) {
+          if (data?.message) {
+            console.error(data?.message); 
+          } else {
+            console.error("addWordService: Something went wrong"); 
+          }
+        }
+        this.addWordDetails$.next(data?.success === true ? data : null);
+      }),
+      catchError((err: HttpErrorResponse) => {
+        console.error(err);
+        this.addWordDetails$.next(null)
+        throw err;
+      })
+    );
+    
+  }
+
+  getRandomWord(): Word | undefined {
+    const unknownWords = this.wordList.filter(word => !this.knownWords.has(word.englishWord));
+    if (unknownWords.length === 0) return undefined;
+    const randomIndex = Math.floor(Math.random() * unknownWords.length);
+    return unknownWords[randomIndex];
+  }
+
+  markWordAsKnown(word: string) {
+    this.knownWords.add(word);
+  }
+
+  resetKnownWords() {
+    this.knownWords.clear();
+  }
+
+  getKnownWordsCount(): number {
+    return this.knownWords.size;
+  }
+
+  getTotalWordsCount(): number {
+    return this.wordList.length;
+  }
+
+  getWordsByCategory(category: string): Word[] {
+    return this.wordList.filter(word => word.category === category);
+  }
+
+  getWordsByDifficulty(difficulty: number): Word[] {
+    return this.wordList.filter(word => word.difficulty === difficulty);
+  }
+}

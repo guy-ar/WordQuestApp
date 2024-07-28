@@ -1,0 +1,26 @@
+{
+    "words": [
+      {
+        "englishWord": "hello",
+        "translations": [
+          { "hebrew": "שלום", "isCorrect": true },
+          { "hebrew": "להתראות", "isCorrect": false },
+          { "hebrew": "תודה", "isCorrect": false },
+          { "hebrew": "בבקשה", "isCorrect": false }
+        ],
+        "difficulty": 1,
+        "category": "ברכות"
+      },
+      {
+        "englishWord": "cat",
+        "translations": [
+          { "hebrew": "חתול", "isCorrect": true },
+          { "hebrew": "כלב", "isCorrect": false },
+          { "hebrew": "ציפור", "isCorrect": false },
+          { "hebrew": "דג", "isCorrect": false }
+        ],
+        "difficulty": 1,
+        "category": "חיות"
+      }
+    ]
+  }
