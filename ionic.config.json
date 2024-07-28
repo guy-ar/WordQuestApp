@@ -1,0 +1,7 @@
+{
+  "name": "WordQuestApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
