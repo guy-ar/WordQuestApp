@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main-menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>הגדרת מילים</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-segment [(ngModel)]="currentView">
+    <ion-segment-button value="view">
+      <ion-label>רשימת מילים</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="add">
+      <ion-label>הוספת מילים</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="currentView === 'view'">
+    <ion-item>
+      <ion-label>קטגוריה</ion-label>
+      <ion-select [(ngModel)]="selectedCategory" (ionChange)="onCategoryChange()">
+        <ion-select-option value="">הכל</ion-select-option>
+        <ion-select-option *ngFor="let category of categories" [value]="category">{{category}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>רמת קושי</ion-label>
+      <ion-select [(ngModel)]="selectedDifficulty" (ionChange)="onDifficultyChange()">
+        <ion-select-option value="">הכל</ion-select-option>
+        <ion-select-option *ngFor="let difficulty of difficulties" [value]="difficulty">{{difficulty}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="block" (click)="resetFilters()">איפוס מסנן</ion-button>
+
+    <ion-list>
+      <ion-item *ngFor="let word of words">
+        <ion-label>
+          <h2>{{word.englishWord}}</h2>
+          <h3>{{word.translations[0].hebrew}}</h3>
+          <p>קטגוריה: {{word.category}}</p>
+          <p>רמת קושי: {{word.difficulty}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="currentView === 'add'">
+     <!--<form (ngSubmit)="addWord()" >-->
+      <h3>הוספת מילה חדשה</h3>
+      <ion-item>
+        <ion-label position="floating">מילה באנגלית</ion-label>
+        <ion-input [(ngModel)]="newWord.englishWord"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">תרגום נכון לעברית</ion-label>
+        <ion-input [(ngModel)]="newWord.correctTranslation"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">תרגום שגוי 1</ion-label>
+        <ion-input [(ngModel)]="newWord.incorrectTranslation1"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">תרגום שגוי 2</ion-label>
+        <ion-input [(ngModel)]="newWord.incorrectTranslation2"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">תרגום שגוי 3</ion-label>
+        <ion-input [(ngModel)]="newWord.incorrectTranslation3"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>רמת קושי</ion-label>
+        <ion-select [(ngModel)]="newWord.difficulty">
+          <ion-select-option [value]="1">קל</ion-select-option>
+          <ion-select-option [value]="2">בינוני</ion-select-option>
+          <ion-select-option [value]="3">קשה</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">קטגוריה</ion-label>
+        <ion-input [(ngModel)]="newWord.category"></ion-input>
+      </ion-item>
+      <ion-button expand="block" (click)="addWord()">הוסף מילה</ion-button>
+  </div>
+</ion-content>

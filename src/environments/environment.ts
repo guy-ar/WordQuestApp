@@ -3,8 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  apiUrl: 'http://localhost:5000/api',
-  production: false
+  apiUrl: 'http://localhost:5000/api/',
+  production: false,
+  PEXELS_API_KEY:'iGuqC3aWxrNxK2qcxxPoYlvXD7QrIGlEiDFB7TAhPUwZI48Z27KDafi6',
+  PEXELS_API_URL: 'https://api.pexels.com/v1/search'
 };
 
 /*

@@ -25,4 +25,8 @@ export class MainMenuPage implements OnInit {
     this.router.navigate(['/scoreboard']);
   }
 
+  navigateToWords() {
+    this.router.navigate(['/words']);
+  }
+
 }

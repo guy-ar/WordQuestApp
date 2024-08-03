@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 //import { AlertController } from '@ionic/angular';
 import { Translation, Word } from 'src/app/model/words.model';
 import { WordsService } from 'src/app/services/words/words.service';
+import { ToastController } from '@ionic/angular';
+import { GameStateService } from 'src/app/services/gameState/gameStateService';
+import { ImageService } from 'src/app/services/image/image.service';
 @Component({
   selector: 'app-game',
   templateUrl: './game.page.html',
@@ -14,17 +17,23 @@ export class GamePage implements OnInit {
   streak = 0;
   currentWord?: Word;
   options: Translation[]  = []
-  showFeedback = false;
+  
   isCorrect = false;
-  feedbackMessage = '';
+  
   knownWords = 0;
   totalWords = 0;
-  //['תפוח', 'בננה', 'תות', 'אגס'];
+  
   progress = 0; // {{ knownWords }} / {{ totalWords }}
+  attempts = 0;
 
+  showHint: boolean = false;
+  hintImageUrl: string = '';
   constructor(private router: Router,
     private wordsService: WordsService,
-    private route: ActivatedRoute
+    private imageService: ImageService,
+    private route: ActivatedRoute,
+    private toastController: ToastController,
+    private gameStateService: GameStateService
   ) {}
 
   ngOnInit() {
@@ -32,11 +41,28 @@ export class GamePage implements OnInit {
       if (params['restart'] === 'true') {
         this.restartGame();
       } else {
-        this.initializeGame();
+        this.startGame();
       }
     });
-    // this.totalWords = this.wordsService.getTotalWordsCount();
-    // this.loadNewWord();
+  }
+  
+  toggleHint() {
+    this.showHint = !this.showHint;
+    if (this.showHint && !this.hintImageUrl && this.currentWord) {
+      this.imageService.getImageForWord(this.currentWord.englishWord).subscribe(
+        (imageUrl) => {
+          this.hintImageUrl = imageUrl;
+        },
+        (error) => {
+          console.error('Error fetching image:', error);
+          this.presentToast('מצטערים, לא הצלחנו להציג רמז ויזואלי הפעם.');
+        }
+      );
+      // Optionally, you can add a small penalty for using a hint
+      this.score -= 1;
+      this.gameStateService.updateScore(this.score);
+      this.presentToast('הנה רמז! נוכו נקודה אחת מהציון שלך.');
+    }
   }
 
   initializeGame() {
@@ -49,8 +75,16 @@ export class GamePage implements OnInit {
     this.wordsService.resetKnownWords();
     this.score = 0;
     this.knownWords = 0;
-    this.showFeedback = false;
-    this.feedbackMessage = '';
+    
+    this.initializeGame();
+  }
+
+  // for now start and restart ar ethe same
+  startGame(){
+    this.wordsService.resetKnownWords();
+    this.score = 0;
+    this.knownWords = 0;
+    
     this.initializeGame();
   }
 
@@ -58,15 +92,15 @@ export class GamePage implements OnInit {
     this.currentWord = this.wordsService.getRandomWord();
     if (this.currentWord) {
       this.options = this.shuffleArray([...this.currentWord.translations]);
-      this.showFeedback = false;
+      this.attempts = 0;
+      this.showHint = false;
+      this.hintImageUrl = ''; // Reset hint image for new word
     } else {
       // All words learned
-      this.feedbackMessage = 'כל הכבוד! סיימתם את כל המילים';
-      this.showFeedback = true;
+      this.presentToast('כל הכבוד! סיימתם את כל המילים');
       setTimeout(() => this.router.navigate(['/results']), 2000);
       
     }
-    // this.showFeedback = false;
   }
 
   private shuffleArray(array: Translation[]): Translation[] {
@@ -81,73 +115,81 @@ export class GamePage implements OnInit {
     return '🔥'.repeat(this.streak);
   }
 
-  // handleAnswer(answer: string) {
-  //   // Logic for handling answer
-  //   // For now, just navigate to results
-  //   this.router.navigate(['/results']);
-  // }
-
-  // checkAnswer(translation: Translation) {
-  //   if (translation.isCorrect) {
-  //     this.score++;
-  //     this.streak++;
-  //     console.log('Correct!');
-  //   } else {
-  //     this.streak = 0;
-  //     let correctWord = ''
-  //     if (this.currentWord && this.currentWord.translations && this.currentWord.translations !== null
-  //       && this.currentWord.translations.length > 0) {
-  //         let translation = this.currentWord.translations.find((t: Translation) => t.isCorrect);
-  //         if (translation)
-  //           correctWord = translation.hebrew
-  //     }
-  //     console.log('Incorrect. The correct answer was: ' + correctWord);
-        
-  //   }  
-  //   this.router.navigate(['/results']);
-  //   //this.loadNewWord();
-  // }
-
+ 
+ 
   async checkAnswer(translation: Translation) {
     this.isCorrect = translation.isCorrect;
-    this.showFeedback = true
+    this.attempts++;
     if (this.isCorrect) {
-      this.score++;
-      this.feedbackMessage = 'כל הכבוד!';
+      if (this.attempts === 1) {
+        this.score += 10;
+        this.presentToast('כל הכבוד! קיבלת 10 נקודות');
+        this.streak++;
+      } else if (this.attempts === 2) {
+        this.score += 7;
+        this.presentToast('טוב מאוד! קיבלת 7 נקודות');
+        this.streak = 0;
+      } else {
+        this.score += 3;
+        this.presentToast('נכון! קיבלת 3 נקודות');
+        this.streak = 0;
+      }
+      this.gameStateService.updateScore(this.score);
       if (this.currentWord) {
         this.wordsService.markWordAsKnown(this.currentWord.englishWord);
-        this.streak++;
       }
       // Load new word after a short delay
       setTimeout(() => this.loadNewWord(), 2000);
     } else {
-      this.streak = 0;
-      this.feedbackMessage = 'שגיאה. נא לנסות שוב ' 
-      // this.feedbackMessage = 'Incorrect. The correct answer was: ' + 
-      //   this.currentWord?.translations.find(t => t.isCorrect)?.hebrew;
+      if (this.attempts >= 3) {
+        this.streak = 0;
+        const correctTranslation = this.currentWord?.translations.find(t => t.isCorrect);
+        let message = "התשובה הנכונה היא: " + correctTranslation?.hebrew
+        this.presentToast(message);
+        if (this.currentWord) 
+          this.wordsService.markWordAsKnown(this.currentWord.englishWord);
 
-      setTimeout(() => this.showFeedback = false, 2000);
+        setTimeout(() => this.loadNewWord(), 3000);
+      }  else {
+        this.presentToast('שגיאה. נא לנסות שוב '); 
+      }
     }
     
     this.knownWords = this.wordsService.getKnownWordsCount();
-    // const alert = await this.alertController.create({
-    //   header: 'תוצאה',
-      
-    //   message: this.feedbackMessage,//'A message should be a short, complete sentence.',
-    //   buttons: ['סגור'],
-    // });
-
-    // await alert.present();
     
-    // // Load new word after a short delay
-    // setTimeout(() => this.loadNewWord(), 2000);
   }
 
   resetGame() {
     this.wordsService.resetKnownWords();
     this.score = 0;
     this.knownWords = 0;
+    this.attempts = 0;
     this.loadNewWord();
   }
+  speakWord() {
+    if (this.currentWord && 'speechSynthesis' in window) {
+      try {
+        const utterance = new SpeechSynthesisUtterance(this.currentWord.englishWord);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.5;
+        window.speechSynthesis.speak(utterance);
+      } catch (error) {
+        console.error('Error speaking word:', error);
+        // You could show a user-friendly error message here
+      }
+    } else {
+      console.warn('Speech synthesis not supported in this browser');
+      // You could show a message to the user or fallback to another method
+    }
 
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
+  }
 }

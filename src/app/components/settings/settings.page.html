@@ -1,37 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main-menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>הגדרות</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content class="ion-padding">
-  <h2>הגדרות</h2>
-  <h3>הוספת מילה חדשה</h3>
-  <ion-item>
-    <ion-label position="floating">מילה באנגלית</ion-label>
-    <ion-input [(ngModel)]="newWord.englishWord"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">תרגום נכון לעברית</ion-label>
-    <ion-input [(ngModel)]="newWord.correctTranslation"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">תרגום שגוי 1</ion-label>
-    <ion-input [(ngModel)]="newWord.incorrectTranslation1"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">תרגום שגוי 2</ion-label>
-    <ion-input [(ngModel)]="newWord.incorrectTranslation2"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">תרגום שגוי 3</ion-label>
-    <ion-input [(ngModel)]="newWord.incorrectTranslation3"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>רמת קושי</ion-label>
-    <ion-select [(ngModel)]="newWord.difficulty">
-      <ion-select-option [value]="1">קל</ion-select-option>
-      <ion-select-option [value]="2">בינוני</ion-select-option>
-      <ion-select-option [value]="3">קשה</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">קטגוריה</ion-label>
-    <ion-input [(ngModel)]="newWord.category"></ion-input>
-  </ion-item>
-  <ion-button expand="block" (click)="addWord()">הוסף מילה</ion-button>
+  <h2>לשימוש  עתידי</h2>
+  
 </ion-content>

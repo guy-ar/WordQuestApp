@@ -11,6 +11,16 @@ export interface Word {
   difficulty: number;
   category: string;
 }
+
+export interface WordToAdd {
+  englishWord: string
+  correctTranslation: string
+  incorrectTranslation1: string
+  incorrectTranslation2: string
+  incorrectTranslation3: string
+  difficulty: number
+  category: string
+}
   
 export interface WordList {
   words: Word[];
@@ -18,5 +28,10 @@ export interface WordList {
 
 export interface AddWordResponse extends GeneralResponse{
   word: Word;
+}
+
+export interface GetWordsResponse extends GeneralResponse{
+  count: number;
+  words: Word[] 
 }
   

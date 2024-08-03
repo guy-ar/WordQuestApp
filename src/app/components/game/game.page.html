@@ -19,24 +19,24 @@
 
     <div *ngIf="currentWord" class="word-container">
       <h2>{{currentWord.englishWord}}</h2>
-      <ion-button fill="clear">
+      <ion-button fill="clear" (click)="speakWord()">
         <ion-icon name="volume-high-outline"></ion-icon>
       </ion-button>
+      <ion-button (click)="toggleHint()">הצג רמז</ion-button>
+    </div>
+    
+    <div *ngIf="showHint" class="hint-container">
+      <img *ngIf="hintImageUrl" [src]="hintImageUrl" alt="Hint image" class="hint-image">
+      <p *ngIf="!hintImageUrl">Loading hint...</p>
     </div>
 
-    <div *ngIf="!showFeedback" class="options-container">
+    <div  class="options-container">
       <ion-button *ngFor="let option of options" 
-        (click)="checkAnswer(option)"
-        [disabled]="showFeedback">
+        (click)="checkAnswer(option)">
         {{option.hebrew}}
       </ion-button>
     </div>
-    <ion-text *ngIf="showFeedback" [color]="isCorrect ? 'success' : 'danger'">
-      <p>{{ feedbackMessage }}</p>
-    </ion-text>
-    <!-- <h2 *ngIf="showFeedback" [ngClass]="{'correct': isCorrect, 'incorrect': !isCorrect}">
-      {{ feedbackMessage }}
-    </h2> -->
+    
     <ion-button (click)="resetGame()">התחל מחדש</ion-button>
     <ion-progress-bar [value]="progress"></ion-progress-bar>
   </div>
