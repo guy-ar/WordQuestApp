@@ -20,17 +20,22 @@ export class GamePage implements OnInit {
 
   currentWordIndex = 0;
   gameWords: Word[] = [];
+  gameKnownWords: Word[] = [];
   failedWords: Word[] = [];
   isCorrect = false;
   
-  knownWords = 0;
-  totalWords = 0;
+  knownWordsCount = 0;
+  totalWordsCount = 0;
   
   progress = 0; // {{ knownWords }} / {{ totalWords }}
   attempts = 0;
 
   showHint: boolean = false;
   hintImageUrl: string = '';
+
+  showingCorrectAnswer: boolean = false;
+  lastSelectedOption: Translation | null = null;
+
   constructor(private router: Router,
     private wordsService: WordsService,
     private imageService: ImageService,
@@ -73,8 +78,10 @@ export class GamePage implements OnInit {
   startNewGame() {
     this.gameWords = this.wordsService.getRandomWordsForGame(20)
     this.failedWords = [];
+    this.gameKnownWords = [];
     this.currentWordIndex = 0;
     this.score = 0;
+    this.streak = 0;
     this.loadCurrentWord();
   }
 
@@ -82,13 +89,16 @@ export class GamePage implements OnInit {
     this.gameWords = this.failedWords;
     this.failedWords = [];
     this.currentWordIndex = 0;
+    this.streak = 0;
     this.loadCurrentWord();
   }
 
   restartGame() {
+    this.gameWords = this.failedWords.concat(this.gameKnownWords);
     this.wordsService.resetKnownWords();
     this.score = 0;
-    this.knownWords = 0;
+    this.streak = 0;
+    this.knownWordsCount = 0;
     this.failedWords = [];
     this.currentWordIndex = 0;
     
@@ -137,11 +147,11 @@ export class GamePage implements OnInit {
     toast.present();
   }
 
-  initializeGame() {
-    this.totalWords = this.wordsService.getTotalWordsCount();
-    this.knownWords = this.wordsService.getKnownWordsCount();
-    this.loadNewWord();
-  }
+  // initializeGame() {
+  //   this.totalWordsCount = this.wordsService.getTotalWordsCount();
+  //   this.knownWordsCount = this.wordsService.getKnownWordsCount();
+  //   this.loadNewWord();
+  // }
 
   // restartGame() {
   //   this.wordsService.resetKnownWords();
@@ -152,13 +162,13 @@ export class GamePage implements OnInit {
   // }
 
   // for now start and restart ar ethe same
-  startGame(){
-    this.wordsService.resetKnownWords();
-    this.score = 0;
-    this.knownWords = 0;
+  // startGame(){
+  //   this.wordsService.resetKnownWords();
+  //   this.score = 0;
+  //   this.knownWordsCount = 0;
     
-    this.initializeGame();
-  }
+  //   this.initializeGame();
+  // }
 
   loadNewWord() {
     this.currentWord = this.wordsService.getRandomWord();
@@ -189,6 +199,7 @@ export class GamePage implements OnInit {
 
   async checkAnswer(translation: Translation) {
     if (translation.isCorrect) {
+      this.gameKnownWords.push(this.currentWord!);
       this.score += 10;
       this.streak++;
       this.presentToast('כל הכבוד! קיבלת 10 נקודות');
@@ -197,11 +208,19 @@ export class GamePage implements OnInit {
       this.score -=5;
       this.failedWords.push(this.currentWord!);
       const correctTranslation = this.currentWord?.translations.find(t => t.isCorrect);
-      this.presentToast(`התשובה הנכונה היא: ${correctTranslation?.hebrew}`);
+      this.presentToast(`התשובה הנכונה היא: ${correctTranslation?.hebrew}`, 1000);
+
+      // Show the correct answer
+      this.showingCorrectAnswer = true;
+      setTimeout(() => {
+        this.showingCorrectAnswer = false;
+        this.currentWordIndex++;
+        this.loadCurrentWord();
+      }, 2900); // Show correct answer for 3 seconds
     }
     
     this.currentWordIndex++;
-    setTimeout(() => this.loadCurrentWord(), 2000);
+    setTimeout(() => this.loadCurrentWord(), 3000);
   }
  
   // async checkAnswer(translation: Translation) {
@@ -249,7 +268,7 @@ export class GamePage implements OnInit {
   resetGame() {
     this.wordsService.resetKnownWords();
     this.score = 0;
-    this.knownWords = 0;
+    this.knownWordsCount = 0;
     this.attempts = 0;
     this.loadNewWord();
   }
@@ -271,11 +290,15 @@ export class GamePage implements OnInit {
 
   }
 
-  async presentToast(message: string) {
+  async presentToast(message: string, toastAdditionalTime?: number) {
+    let duration = 2000;
+    if (toastAdditionalTime) {
+      duration  += toastAdditionalTime;
+    }
     const toast = await this.toastController.create({
       message: message,
-      duration: 2000,
-      position: 'bottom'
+      duration: duration,
+      position: 'top'
     });
     toast.present();
   }

@@ -32,7 +32,13 @@
 
     <div  class="options-container">
       <ion-button *ngFor="let option of options" 
-        (click)="checkAnswer(option)">
+        (click)="checkAnswer(option)"
+        expand="block"
+        [disabled]="showingCorrectAnswer"
+        [ngClass]="{
+          'correct-answer': showingCorrectAnswer && option.isCorrect,
+          'incorrect-answer': showingCorrectAnswer && !option.isCorrect && lastSelectedOption === option
+        }">
         {{option.hebrew}}
       </ion-button>
     </div>

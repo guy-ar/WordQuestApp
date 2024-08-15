@@ -39,3 +39,15 @@
     .correct { color: green; }
     .incorrect { color: red; }
   }
+
+  .correct-answer {
+    --background: #4caf50 !important; // Green background
+    --border-color: #45a049 !important;
+    --color: white !important;
+  }
+  
+  .incorrect-answer {
+    --background: #ffcccb !important; // Light red background
+    --border-color: #ff8080 !important;
+    --color: #d32f2f !important;
+  }

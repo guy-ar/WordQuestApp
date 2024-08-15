@@ -121,6 +121,7 @@ export class WordsService {
   markWordAsKnown(word: string) {
     this.knownWords.add(word);
   }
+  
 
   resetKnownWords() {
     this.knownWords.clear();
