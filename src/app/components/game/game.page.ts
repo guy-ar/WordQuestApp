@@ -17,7 +17,10 @@ export class GamePage implements OnInit {
   streak = 0;
   currentWord?: Word;
   options: Translation[]  = []
-  
+
+  currentWordIndex = 0;
+  gameWords: Word[] = [];
+  failedWords: Word[] = [];
   isCorrect = false;
   
   knownWords = 0;
@@ -40,8 +43,10 @@ export class GamePage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['restart'] === 'true') {
         this.restartGame();
+      } else if (params['failedWords'] === 'true') {
+        this.startFailedWordsGame();
       } else {
-        this.startGame();
+        this.startNewGame();
       }
     });
   }
@@ -65,19 +70,86 @@ export class GamePage implements OnInit {
     }
   }
 
-  initializeGame() {
-    this.totalWords = this.wordsService.getTotalWordsCount();
-    this.knownWords = this.wordsService.getKnownWordsCount();
-    this.loadNewWord();
+  startNewGame() {
+    this.gameWords = this.wordsService.getRandomWordsForGame(20)
+    this.failedWords = [];
+    this.currentWordIndex = 0;
+    this.score = 0;
+    this.loadCurrentWord();
+  }
+
+  startFailedWordsGame() {
+    this.gameWords = this.failedWords;
+    this.failedWords = [];
+    this.currentWordIndex = 0;
+    this.loadCurrentWord();
   }
 
   restartGame() {
     this.wordsService.resetKnownWords();
     this.score = 0;
     this.knownWords = 0;
+    this.failedWords = [];
+    this.currentWordIndex = 0;
     
-    this.initializeGame();
+    this.loadCurrentWord();
   }
+
+  loadCurrentWord() {
+    if (this.currentWordIndex < this.gameWords.length) {
+      this.currentWord = this.gameWords[this.currentWordIndex];
+      this.options = this.shuffleArray([...this.currentWord.translations]);
+      this.showHint = false;
+      this.hintImageUrl = '';
+    } else {
+      this.endGame();
+    }
+  }
+
+  endGame() {
+    this.gameStateService.updateScore(this.score);
+    if (this.failedWords.length > 0) {
+      this.presentFailedWordsOption();
+    } else {
+      this.router.navigate(['/results']);
+    }
+  }
+
+  async presentFailedWordsOption() {
+    const toast = await this.toastController.create({
+      message: `יש לך ${this.failedWords.length} מילים שגויות. האם תרצה לנסות שוב?`,
+      position: 'middle',
+      buttons: [
+        {
+          side: 'start',
+          text: 'כן',
+          handler: () => {
+            this.startFailedWordsGame();
+          }
+        }, {
+          text: 'לא',
+          handler: () => {
+            this.router.navigate(['/results']);
+          }
+        }
+      ]
+    });
+    toast.present();
+  }
+
+  initializeGame() {
+    this.totalWords = this.wordsService.getTotalWordsCount();
+    this.knownWords = this.wordsService.getKnownWordsCount();
+    this.loadNewWord();
+  }
+
+  // restartGame() {
+  //   this.wordsService.resetKnownWords();
+  //   this.score = 0;
+  //   this.knownWords = 0;
+    
+  //   this.initializeGame();
+  // }
 
   // for now start and restart ar ethe same
   startGame(){
@@ -115,49 +187,64 @@ export class GamePage implements OnInit {
     return '🔥'.repeat(this.streak);
   }
 
- 
- 
   async checkAnswer(translation: Translation) {
-    this.isCorrect = translation.isCorrect;
-    this.attempts++;
-    if (this.isCorrect) {
-      if (this.attempts === 1) {
-        this.score += 10;
-        this.presentToast('כל הכבוד! קיבלת 10 נקודות');
-        this.streak++;
-      } else if (this.attempts === 2) {
-        this.score += 7;
-        this.presentToast('טוב מאוד! קיבלת 7 נקודות');
-        this.streak = 0;
-      } else {
-        this.score += 3;
-        this.presentToast('נכון! קיבלת 3 נקודות');
-        this.streak = 0;
-      }
-      this.gameStateService.updateScore(this.score);
-      if (this.currentWord) {
-        this.wordsService.markWordAsKnown(this.currentWord.englishWord);
-      }
-      // Load new word after a short delay
-      setTimeout(() => this.loadNewWord(), 2000);
+    if (translation.isCorrect) {
+      this.score += 10;
+      this.streak++;
+      this.presentToast('כל הכבוד! קיבלת 10 נקודות');
     } else {
-      if (this.attempts >= 3) {
-        this.streak = 0;
-        const correctTranslation = this.currentWord?.translations.find(t => t.isCorrect);
-        let message = "התשובה הנכונה היא: " + correctTranslation?.hebrew
-        this.presentToast(message);
-        if (this.currentWord) 
-          this.wordsService.markWordAsKnown(this.currentWord.englishWord);
-
-        setTimeout(() => this.loadNewWord(), 3000);
-      }  else {
-        this.presentToast('שגיאה. נא לנסות שוב '); 
-      }
+      this.streak = 0;
+      this.score -=5;
+      this.failedWords.push(this.currentWord!);
+      const correctTranslation = this.currentWord?.translations.find(t => t.isCorrect);
+      this.presentToast(`התשובה הנכונה היא: ${correctTranslation?.hebrew}`);
     }
     
-    this.knownWords = this.wordsService.getKnownWordsCount();
-    
+    this.currentWordIndex++;
+    setTimeout(() => this.loadCurrentWord(), 2000);
   }
+ 
+  // async checkAnswer(translation: Translation) {
+  //   this.isCorrect = translation.isCorrect;
+  //   this.attempts++;
+  //   if (this.isCorrect) {
+  //     if (this.attempts === 1) {
+  //       this.score += 10;
+  //       this.presentToast('כל הכבוד! קיבלת 10 נקודות');
+  //       this.streak++;
+  //     } else if (this.attempts === 2) {
+  //       this.score += 7;
+  //       this.presentToast('טוב מאוד! קיבלת 7 נקודות');
+  //       this.streak = 0;
+  //     } else {
+  //       this.score += 3;
+  //       this.presentToast('נכון! קיבלת 3 נקודות');
+  //       this.streak = 0;
+  //     }
+  //     this.gameStateService.updateScore(this.score);
+  //     if (this.currentWord) {
+  //       this.wordsService.markWordAsKnown(this.currentWord.englishWord);
+  //     }
+  //     // Load new word after a short delay
+  //     setTimeout(() => this.loadNewWord(), 2000);
+  //   } else {
+  //     if (this.attempts >= 3) {
+  //       this.streak = 0;
+  //       const correctTranslation = this.currentWord?.translations.find(t => t.isCorrect);
+  //       let message = "התשובה הנכונה היא: " + correctTranslation?.hebrew
+  //       this.presentToast(message);
+  //       if (this.currentWord) 
+  //         this.wordsService.markWordAsKnown(this.currentWord.englishWord);
+
+  //       setTimeout(() => this.loadNewWord(), 3000);
+  //     }  else {
+  //       this.presentToast('שגיאה. נא לנסות שוב '); 
+  //     }
+  //   }
+    
+  //   this.knownWords = this.wordsService.getKnownWordsCount();
+    
+  // }
 
   resetGame() {
     this.wordsService.resetKnownWords();

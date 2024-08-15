@@ -106,6 +106,18 @@ export class WordsService {
     return unknownWords[randomIndex];
   }
 
+  getRandomWordsForGame(amount: number): Word[] {
+    const wordsForGame: Word[] = [];
+    for (let i = 0; i < amount; i++) {
+      const word = this.getRandomWord();
+      if (word) {
+        this.markWordAsKnown(word.englishWord);
+        wordsForGame.push(word);
+      }
+    }
+    return wordsForGame;
+  }
+
   markWordAsKnown(word: string) {
     this.knownWords.add(word);
   }
