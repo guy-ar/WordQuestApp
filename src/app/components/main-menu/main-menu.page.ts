@@ -1,16 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/authenticate/authService.service';
 
 @Component({
   selector: 'app-main-menu',
   templateUrl: './main-menu.page.html',
-  styleUrls: ['./main-menu.page.scss'],
+  styleUrls: ['./main-menu.page.scss']
 })
 export class MainMenuPage implements OnInit {
-
-  constructor(private router: Router) { }
+  isLoggedIn: boolean = false;
+  username = 'נושה';
+  constructor(private router: Router,
+    private authService: AuthService,
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params['loggedIn'] === 'true') {
+        this.isLoggedIn = this.authService.IsAuthenticated
+      }
+    });
   }
 
   navigateToGame() {
@@ -29,4 +40,18 @@ export class MainMenuPage implements OnInit {
     this.router.navigate(['/words']);
   }
 
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  navigateToRegister() {
+    this.router.navigate(['/register']);
+  }
+
+  logout() {
+    this.authService.logout().then(() => {
+      this.isLoggedIn = false;
+      this.router.navigate(['/']);
+    });
+  }
 }

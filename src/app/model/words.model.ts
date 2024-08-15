@@ -34,4 +34,16 @@ export interface GetWordsResponse extends GeneralResponse{
   count: number;
   words: Word[] 
 }
-  
+export interface UploadWordsResponse extends GeneralResponse {
+  results: UploadResult
+}
+export interface UploadResult {
+  added: number
+  errors: UploadError[]
+  skipped: number
+}
+
+export interface UploadError {
+  couse: string
+  errorMsg?: string
+}

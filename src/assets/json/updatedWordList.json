@@ -1,0 +1,367 @@
+{
+    "words": [
+        {
+            "englishWord": "notebook",
+            "translations": [
+                { "hebrew": "מחברת", "isCorrect": true },
+                { "hebrew": "עט", "isCorrect": false },
+                { "hebrew": "שולחן", "isCorrect": false },
+                { "hebrew": "כיסא", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "בית ספר"
+        },
+        {
+            "englishWord": "computer",
+            "translations": [
+                { "hebrew": "מחשב", "isCorrect": true },
+                { "hebrew": "טלפון", "isCorrect": false },
+                { "hebrew": "טלוויזיה", "isCorrect": false },
+                { "hebrew": "רדיו", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "טכנולוגיה"
+        },
+        {
+            "englishWord": "nose",
+            "translations": [
+                { "hebrew": "אף", "isCorrect": true },
+                { "hebrew": "עין", "isCorrect": false },
+                { "hebrew": "אוזן", "isCorrect": false },
+                { "hebrew": "פה", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "גוף"
+        },
+        {
+            "englishWord": "mouth",
+            "translations": [
+                { "hebrew": "פה", "isCorrect": true },
+                { "hebrew": "אף", "isCorrect": false },
+                { "hebrew": "עין", "isCorrect": false },
+                { "hebrew": "יד", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "גוף"
+        },
+        {
+            "englishWord": "sister",
+            "translations": [
+                { "hebrew": "אחות", "isCorrect": true },
+                { "hebrew": "אח", "isCorrect": false },
+                { "hebrew": "אם", "isCorrect": false },
+                { "hebrew": "אב", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "משפחה"
+        },
+        {
+            "englishWord": "brother",
+            "translations": [
+                { "hebrew": "אח", "isCorrect": true },
+                { "hebrew": "אחות", "isCorrect": false },
+                { "hebrew": "בן דוד", "isCorrect": false },
+                { "hebrew": "דוד", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "משפחה"
+        },
+        {
+            "englishWord": "yes",
+            "translations": [
+                { "hebrew": "כן", "isCorrect": true },
+                { "hebrew": "לא", "isCorrect": false },
+                { "hebrew": "אולי", "isCorrect": false },
+                { "hebrew": "למה", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "מילים שימושיות"
+        },
+        {
+            "englishWord": "no",
+            "translations": [
+                { "hebrew": "לא", "isCorrect": true },
+                { "hebrew": "כן", "isCorrect": false },
+                { "hebrew": "אולי", "isCorrect": false },
+                { "hebrew": "למה", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "מילים שימושיות"
+        },
+        {
+            "englishWord": "and",
+            "translations": [
+                { "hebrew": "ו", "isCorrect": true },
+                { "hebrew": "או", "isCorrect": false },
+                { "hebrew": "אבל", "isCorrect": false },
+                { "hebrew": "כי", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "מילים שימושיות"
+        },
+        {
+            "englishWord": "dad",
+            "translations": [
+                { "hebrew": "אבא", "isCorrect": true },
+                { "hebrew": "אמא", "isCorrect": false },
+                { "hebrew": "בן", "isCorrect": false },
+                { "hebrew": "דוד", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "משפחה"
+        },
+        {
+            "englishWord": "desk",
+            "translations": [
+                { "hebrew": "שולחן כתיבה", "isCorrect": true },
+                { "hebrew": "כיסא", "isCorrect": false },
+                { "hebrew": "מחברת", "isCorrect": false },
+                { "hebrew": "ספר", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "ריהוט"
+        },
+        {
+            "englishWord": "duck",
+            "translations": [
+                { "hebrew": "ברווז", "isCorrect": true },
+                { "hebrew": "תרנגול", "isCorrect": false },
+                { "hebrew": "חתול", "isCorrect": false },
+                { "hebrew": "פרה", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "חיות"
+        },
+        {
+            "englishWord": "I don't like",
+            "translations": [
+                { "hebrew": "אני לא אוהב", "isCorrect": true },
+                { "hebrew": "אני אוהב", "isCorrect": false },
+                { "hebrew": "אני שונא", "isCorrect": false },
+                { "hebrew": "אני חושב", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "ביטויים"
+        },
+        {
+            "englishWord": "but",
+            "translations": [
+                { "hebrew": "אבל", "isCorrect": true },
+                { "hebrew": "וגם", "isCorrect": false },
+                { "hebrew": "או", "isCorrect": false },
+                { "hebrew": "כי", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "מילים שימושיות"
+        },
+        {
+            "englishWord": "help",
+            "translations": [
+                { "hebrew": "עזרה", "isCorrect": true },
+                { "hebrew": "פגיעה", "isCorrect": false },
+                { "hebrew": "סכנה", "isCorrect": false },
+                { "hebrew": "בעיה", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "מילים שימושיות"
+        },
+        {
+            "englishWord": "sad",
+            "translations": [
+                { "hebrew": "עצוב", "isCorrect": true },
+                { "hebrew": "שמח", "isCorrect": false },
+                { "hebrew": "כועס", "isCorrect": false },
+                { "hebrew": "מפחד", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "רגשות"
+        },
+        {
+            "englishWord": "bad",
+            "translations": [
+                { "hebrew": "רע", "isCorrect": true },
+                { "hebrew": "טוב", "isCorrect": false },
+                { "hebrew": "נפלא", "isCorrect": false },
+                { "hebrew": "רגיל", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "תיאורים"
+        },
+        {
+            "englishWord": "lamp",
+            "translations": [
+                { "hebrew": "מנורה", "isCorrect": true },
+                { "hebrew": "כיסא", "isCorrect": false },
+                { "hebrew": "מיטה", "isCorrect": false },
+                { "hebrew": "מראה", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "ריהוט"
+        },
+        {
+            "englishWord": "mat",
+            "translations": [
+                { "hebrew": "שטיחון", "isCorrect": true },
+                { "hebrew": "שולחן", "isCorrect": false },
+                { "hebrew": "מגבת", "isCorrect": false },
+                { "hebrew": "ספר", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "בית"
+        },
+        {
+            "englishWord": "milk",
+            "translations": [
+                { "hebrew": "חלב", "isCorrect": true },
+                { "hebrew": "לחם", "isCorrect": false },
+                { "hebrew": "מים", "isCorrect": false },
+                { "hebrew": "ביצה", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "מזון"
+        },
+        {
+            "englishWord": "floor",
+            "translations": [
+                { "hebrew": "רצפה", "isCorrect": true },
+                { "hebrew": "תקרה", "isCorrect": false },
+                { "hebrew": "קיר", "isCorrect": false },
+                { "hebrew": "חלון", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "בית"
+        },
+        {
+            "englishWord": "garden",
+            "translations": [
+                { "hebrew": "גן", "isCorrect": true },
+                { "hebrew": "חדר", "isCorrect": false },
+                { "hebrew": "מרפסת", "isCorrect": false },
+                { "hebrew": "חניה", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "חוץ"
+        },
+        {
+            "englishWord": "kitchen",
+            "translations": [
+                { "hebrew": "מטבח", "isCorrect": true },
+                { "hebrew": "סלון", "isCorrect": false },
+                { "hebrew": "שירותים", "isCorrect": false },
+                { "hebrew": "חדר שינה", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "בית"
+        },
+        {
+            "englishWord": "mouse",
+            "translations": [
+                { "hebrew": "עכבר", "isCorrect": true },
+                { "hebrew": "חתול", "isCorrect": false },
+                { "hebrew": "כלב", "isCorrect": false },
+                { "hebrew": "דג", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "בעלי חיים"
+        },
+        {
+            "englishWord": "sheep",
+            "translations": [
+                { "hebrew": "כבשה", "isCorrect": true },
+                { "hebrew": "פרה", "isCorrect": false },
+                { "hebrew": "עיזים", "isCorrect": false },
+                { "hebrew": "חזיר", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "בעלי חיים"
+        },
+        {
+            "englishWord": "tree",
+            "translations": [
+                { "hebrew": "עץ", "isCorrect": true },
+                { "hebrew": "פרח", "isCorrect": false },
+                { "hebrew": "שיח", "isCorrect": false },
+                { "hebrew": "דשא", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "טבע"
+        },
+        {
+            "englishWord": "friend",
+            "translations": [
+                { "hebrew": "חבר", "isCorrect": true },
+                { "hebrew": "משפחה", "isCorrect": false },
+                { "hebrew": "אויב", "isCorrect": false },
+                { "hebrew": "שכן", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "חברה"
+        },
+        {
+            "englishWord": "play",
+            "translations": [
+                { "hebrew": "לשחק", "isCorrect": true },
+                { "hebrew": "לעבוד", "isCorrect": false },
+                { "hebrew": "לקרוא", "isCorrect": false },
+                { "hebrew": "לשיר", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "פעילות"
+        },
+        {
+            "englishWord": "sing",
+            "translations": [
+                { "hebrew": "לשיר", "isCorrect": true },
+                { "hebrew": "לצייר", "isCorrect": false },
+                { "hebrew": "לרקוד", "isCorrect": false },
+                { "hebrew": "לשחק", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "פעילות"
+        },
+        {
+            "englishWord": "run",
+            "translations": [
+                { "hebrew": "לרוץ", "isCorrect": true },
+                { "hebrew": "ללכת", "isCorrect": false },
+                { "hebrew": "לזחול", "isCorrect": false },
+                { "hebrew": "לעמוד", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "פעילות"
+        },
+        {
+            "englishWord": "rest",
+            "translations": [
+                { "hebrew": "לנוח", "isCorrect": true },
+                { "hebrew": "לעבוד", "isCorrect": false },
+                { "hebrew": "לשחק", "isCorrect": false },
+                { "hebrew": "ללכת", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "פעילות"
+        },
+        {
+            "englishWord": "rabbit",
+            "translations": [
+                { "hebrew": "ארנב", "isCorrect": true },
+                { "hebrew": "חתול", "isCorrect": false },
+                { "hebrew": "כלב", "isCorrect": false },
+                { "hebrew": "עכבר", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "בעלי חיים"
+        },
+        {
+            "englishWord": "hen",
+            "translations": [
+                { "hebrew": "תרנגולת", "isCorrect": true },
+                { "hebrew": "ברווז", "isCorrect": false },
+                { "hebrew": "אווז", "isCorrect": false },
+                { "hebrew": "חמור", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "בעלי חיים"
+        }
+    ]
+}

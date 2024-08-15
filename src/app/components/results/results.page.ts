@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
 import { filter, Subscription } from 'rxjs';
 import { GameStateService } from 'src/app/services/gameState/gameStateService';
 

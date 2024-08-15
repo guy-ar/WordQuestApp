@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 //import { AlertController } from '@ionic/angular';
 import { Translation, Word } from 'src/app/model/words.model';
 import { WordsService } from 'src/app/services/words/words.service';
 import { ToastController } from '@ionic/angular';
 import { GameStateService } from 'src/app/services/gameState/gameStateService';
 import { ImageService } from 'src/app/services/image/image.service';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-game',
   templateUrl: './game.page.html',

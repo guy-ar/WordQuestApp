@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { AddWordResponse, GetWordsResponse, Word, WordList } from 'src/app/model/words.model';
+import { AddWordResponse, GetWordsResponse, UploadWordsResponse, Word, WordList } from 'src/app/model/words.model';
 import { environment } from 'src/environments/environment';
 
 
@@ -30,15 +30,15 @@ export class WordsService {
 
   loadWords() {
     this.getWords() //this.selectedCategory, this.selectedDifficulty
-      .subscribe(
-        response => {
+      .subscribe({
+        next: response => {
           this.wordList = response.words;
         },
-        error => {
+        error: error => {
           console.error('Error fetching words:', error);
           // Handle error (e.g., show a toast message)
         }
-      );
+    });
   }
 
   // addWord(newWord: {
@@ -56,6 +56,10 @@ export class WordsService {
     if (difficulty) params.difficulty = difficulty.toString();
     
     return this.http.get<GetWordsResponse>(environment.apiUrl + 'words', { params });
+  }
+
+  uploadWordsFile(formData: FormData): Observable<any> {
+    return this.http.post<UploadWordsResponse>(environment.apiUrl + `words/upload`, formData);
   }
 
   addWord(newWord: {

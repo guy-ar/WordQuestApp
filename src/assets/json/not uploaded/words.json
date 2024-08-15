@@ -1,0 +1,224 @@
+{
+    "words": [
+        {
+            "englishWord": "gray",
+            "translations": [
+                { "hebrew": "אפור", "isCorrect": true },
+                { "hebrew": "ירוק", "isCorrect": false },
+                { "hebrew": "כחול", "isCorrect": false },
+                { "hebrew": "צהוב", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "צבעים"
+        },
+        {
+            "englishWord": "door",
+            "translations": [
+                { "hebrew": "דלת", "isCorrect": true },
+                { "hebrew": "חלון", "isCorrect": false },
+                { "hebrew": "מיטה", "isCorrect": false },
+                { "hebrew": "שולחן", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "חפצים בבית"
+        },
+        {
+            "englishWord": "house",
+            "translations": [
+                { "hebrew": "בית", "isCorrect": true },
+                { "hebrew": "עיר", "isCorrect": false },
+                { "hebrew": "כיסא", "isCorrect": false },
+                { "hebrew": "ספר", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "חפצים בבית"
+        },
+        {
+            "englishWord": "gift",
+            "translations": [
+                { "hebrew": "מתנה", "isCorrect": true },
+                { "hebrew": "כרטיס", "isCorrect": false },
+                { "hebrew": "עוגה", "isCorrect": false },
+                { "hebrew": "חנות", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "אירועים"
+        },
+        {
+            "englishWord": "grandpa",
+            "translations": [
+                { "hebrew": "סבא", "isCorrect": true },
+                { "hebrew": "אבא", "isCorrect": false },
+                { "hebrew": "דוד", "isCorrect": false },
+                { "hebrew": "בן", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "משפחה"
+        },
+        {
+            "englishWord": "grandma",
+            "translations": [
+                { "hebrew": "סבתא", "isCorrect": true },
+                { "hebrew": "אמא", "isCorrect": false },
+                { "hebrew": "דודה", "isCorrect": false },
+                { "hebrew": "בת", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "משפחה"
+        },
+        {
+            "englishWord": "Open the ...",
+            "translations": [
+                { "hebrew": "פתח את ...", "isCorrect": true },
+                { "hebrew": "סגור את ...", "isCorrect": false },
+                { "hebrew": "שבור את ...", "isCorrect": false },
+                { "hebrew": "שים את ...", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "פעולות"
+        },
+        {
+            "englishWord": "Close the ...",
+            "translations": [
+                { "hebrew": "סגור את ...", "isCorrect": true },
+                { "hebrew": "פתח את ...", "isCorrect": false },
+                { "hebrew": "הרם את ...", "isCorrect": false },
+                { "hebrew": "הורד את ...", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "פעולות"
+        },
+        {
+            "englishWord": "school",
+            "translations": [
+                { "hebrew": "בית ספר", "isCorrect": true },
+                { "hebrew": "אוניברסיטה", "isCorrect": false },
+                { "hebrew": "מוזיאון", "isCorrect": false },
+                { "hebrew": "כיתה", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "חינוך"
+        },
+        {
+            "englishWord": "eraser",
+            "translations": [
+                { "hebrew": "מחק", "isCorrect": true },
+                { "hebrew": "עט", "isCorrect": false },
+                { "hebrew": "עיפרון", "isCorrect": false },
+                { "hebrew": "סכין", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "בית ספר"
+        },
+        {
+            "englishWord": "bed",
+            "translations": [
+                { "hebrew": "מיטה", "isCorrect": true },
+                { "hebrew": "כרית", "isCorrect": false },
+                { "hebrew": "שמיכה", "isCorrect": false },
+                { "hebrew": "כיסא", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "חפצים בבית"
+        },
+        {
+            "englishWord": "pencil",
+            "translations": [
+                { "hebrew": "עיפרון", "isCorrect": true },
+                { "hebrew": "עט", "isCorrect": false },
+                { "hebrew": "מחק", "isCorrect": false },
+                { "hebrew": "שלחן", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "בית ספר"
+        },
+        {
+            "englishWord": "table",
+            "translations": [
+                { "hebrew": "שולחן", "isCorrect": true },
+                { "hebrew": "כיסא", "isCorrect": false },
+                { "hebrew": "מיטה", "isCorrect": false },
+                { "hebrew": "חלון", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "חפצים בבית"
+        },
+        {
+            "englishWord": "test",
+            "translations": [
+                { "hebrew": "מבחן", "isCorrect": true },
+                { "hebrew": "שיעור", "isCorrect": false },
+                { "hebrew": "תרגול", "isCorrect": false },
+                { "hebrew": "כיתה", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "חינוך"
+        },
+        {
+            "englishWord": "hat",
+            "translations": [
+                { "hebrew": "כובע", "isCorrect": true },
+                { "hebrew": "נעל", "isCorrect": false },
+                { "hebrew": "מעיל", "isCorrect": false },
+                { "hebrew": "תיק", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "לבוש"
+        },
+        {
+            "englishWord": "add",
+            "translations": [
+                { "hebrew": "הוסף", "isCorrect": true },
+                { "hebrew": "חסר", "isCorrect": false },
+                { "hebrew": "הורד", "isCorrect": false },
+                { "hebrew": "עבור", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "פעולות"
+        },
+        {
+            "englishWord": "teacher",
+            "translations": [
+                { "hebrew": "מורה", "isCorrect": true },
+                { "hebrew": "תלמיד", "isCorrect": false },
+                { "hebrew": "חבר", "isCorrect": false },
+                { "hebrew": "רופא", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "חינוך"
+        },
+        {
+            "englishWord": "plus",
+            "translations": [
+                { "hebrew": "פלוס", "isCorrect": true },
+                { "hebrew": "מינוס", "isCorrect": false },
+                { "hebrew": "כפול", "isCorrect": false },
+                { "hebrew": "חלקי", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "מתמטיקה"
+        },
+        {
+            "englishWord": "pencil case",
+            "translations": [
+                { "hebrew": "קלמר", "isCorrect": true },
+                { "hebrew": "עט", "isCorrect": false },
+                { "hebrew": "עיפרון", "isCorrect": false },
+                { "hebrew": "ספר", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "בית ספר"
+        },
+        {
+            "englishWord": "pen",
+            "translations": [
+                { "hebrew": "עט", "isCorrect": true },
+                { "hebrew": "עיפרון", "isCorrect": false },
+                { "hebrew": "מחק", "isCorrect": false },
+                { "hebrew": "קלמר", "isCorrect": false }
+            ],
+            "difficulty": 1,
+            "category": "בית ספר"
+        }
+    ]
+}

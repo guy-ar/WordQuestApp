@@ -5,11 +5,46 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h1>Word Quest</h1>
-  <h2>מסע המילים</h2>
+  <h1>מסע המילים</h1>
+  <ion-chip *ngIf="isLoggedIn" class="ion-margin-bottom">
+    <ion-avatar>
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-avatar>
+    <ion-label>{{ username }}</ion-label>
+  </ion-chip>
   
-  <ion-button expand="block" (click)="navigateToGame()">למשחק</ion-button>
-  <ion-button expand="block" (click)="navigateToWords()">מילים</ion-button>
-  <ion-button expand="block" (click)="navigateToSettings()">הגדרות</ion-button>
-  <ion-button expand="block" (click)="navigateToScoreboard()">לוח תוצאות</ion-button>
+  <ion-list>
+    <ion-item button (click)="navigateToGame()">
+      <ion-icon name="play" slot="start"></ion-icon>
+      <ion-label>למשחק</ion-label>
+    </ion-item>
+    <ion-item button (click)="navigateToWords()">
+      <ion-icon name="book" slot="start"></ion-icon>
+      <ion-label>מילים</ion-label>
+    </ion-item>
+    <ion-item button (click)="navigateToSettings()">
+      <ion-icon name="settings" slot="start"></ion-icon>
+      <ion-label>הגדרות</ion-label>
+    </ion-item>
+    <ion-item button (click)="navigateToScoreboard()">
+      <ion-icon name="trophy" slot="start"></ion-icon>
+      <ion-label>לוח תוצאות</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="!isLoggedIn">
+    <ion-item button (click)="navigateToLogin()">
+      <ion-icon name="log-in" slot="start"></ion-icon>
+      <ion-label>התחברות</ion-label>
+    </ion-item>
+    <ion-item button (click)="navigateToRegister()">
+      <ion-icon name="person-add" slot="start"></ion-icon>
+      <ion-label>הרשמה</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-button *ngIf="isLoggedIn" expand="block" (click)="logout()">
+    <ion-icon name="log-out" slot="start"></ion-icon>
+    התנתקות
+  </ion-button>
 </ion-content>

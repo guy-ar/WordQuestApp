@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { WordsService } from 'src/app/services/words/words.service';
 import { Word, WordToAdd } from 'src/app/model/words.model';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 
@@ -18,7 +18,9 @@ export class WordsPage  implements OnInit, OnDestroy {
   selectedCategory: string = '';
   selectedDifficulty: number | undefined = undefined;
 
-  currentView: 'view' | 'add' = 'view';
+  currentView: 'view' | 'add' | 'upload' = 'view';
+  selectedFile: File | null = null;
+
   newWord: WordToAdd = { 
     englishWord: '',
     correctTranslation: '',
@@ -29,13 +31,14 @@ export class WordsPage  implements OnInit, OnDestroy {
     category: ''
   };
 
-  addWordSubscription?: Subscription
+  private subscriptions: Subscription[] = [];
 
   constructor(private wordsService: WordsService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private alertController: AlertController
   ) { }
   ngOnDestroy(): void {
-    this.addWordSubscription?.unsubscribe();
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   ngOnInit() {
@@ -44,16 +47,17 @@ export class WordsPage  implements OnInit, OnDestroy {
   }
 
   loadWords() {
-    this.wordsService.getWords(this.selectedCategory, this.selectedDifficulty)
-      .subscribe(
-        response => {
+    const sub = this.wordsService.getWords(this.selectedCategory, this.selectedDifficulty)
+      .subscribe({
+        next: response => {
           this.words = response.words;
         },
-        error => {
+        error: error => {
           console.error('Error fetching words:', error);
-          // Handle error (e.g., show a toast message)
+          this.presentToast('שגיאה בטעינת המילים. נסה שוב מאוחר יותר.');
         }
-      );
+      });
+    this.subscriptions.push(sub);
   }
 
   onCategoryChange() {
@@ -79,8 +83,9 @@ export class WordsPage  implements OnInit, OnDestroy {
   }
 
   onAddWords() {
-    this.addWordSubscription = this.wordsService.onAddWordDetails$.subscribe(
-      addWordResponse => {
+    const sub = this.wordsService.onAddWordDetails$
+    .subscribe({
+      next: (addWordResponse) => {
         if (addWordResponse && addWordResponse.success === true) {
           console.log('Word added successfully');
           this.presentToast('המילה נוספה בהצלחה');
@@ -91,8 +96,14 @@ export class WordsPage  implements OnInit, OnDestroy {
           this.presentToast('המילה לא נוספה');
           console.error('Error adding word:', addWordResponse?.message);
         }
+      },
+      error: (error) => {
+        console.error('Error adding word:', error);
+        this.presentToast('שגיאה בהוספת המילה. נסה שוב מאוחר יותר.');
       }
-    );
+    });
+    
+    this.subscriptions.push(sub);
   }
   addWord() {
     if (this.validateForm()) {
@@ -117,7 +128,7 @@ export class WordsPage  implements OnInit, OnDestroy {
     const toast = await this.toastController.create({
       message: message,
       duration: 2000,
-      position: 'bottom'
+      position: 'top'
     });
     toast.present();
   }
@@ -132,6 +143,68 @@ export class WordsPage  implements OnInit, OnDestroy {
       difficulty: 1,
       category: ''
     };
+  }
+
+  onFileSelected(event: Event) {
+    const element = event.target as HTMLInputElement;
+    const file = element.files ? element.files[0] : null;
+    if (file) {
+      if (file.type === 'application/json') {
+        this.selectedFile = file;
+      } else {
+        this.presentToast('אנא בחר קובץ JSON בלבד');
+        element.value = '';
+      }
+    }
+  }
+
+  async uploadFile() {
+    if (!this.selectedFile) {
+      this.presentToast('Please select a file first');
+      return;
+    }
+
+    const alert = await this.alertController.create({
+      header: 'אישור העלאה',
+      message: 'האם אתה בטוח שברצונך להעלות את הקובץ?',
+      buttons: [
+        {
+          text: 'ביטול',
+          role: 'cancel'
+        },
+        {
+          text: 'אישור',
+          handler: () => {
+            this.proceedWithUpload();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  proceedWithUpload() {
+    const formData = new FormData();
+    formData.append('wordsFile', this.selectedFile as File);
+
+    const sub =  this.wordsService.uploadWordsFile(formData)
+    .subscribe({
+      next: response => {
+        if (response.success === false) {
+          this.presentToast(response.message);
+          return;
+        }
+        this.presentToast('הקובץ הועלה בהצלחה');
+        this.loadWords();
+        this.currentView = 'view';
+      },
+      error: error => {
+        console.error('Error uploading file:', error);
+        this.presentToast('שגיאה בהעלאת הקובץ');
+      }
+    });
+    this.subscriptions.push(sub);
   }
 
 }

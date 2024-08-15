@@ -15,6 +15,9 @@
     <ion-segment-button value="add">
       <ion-label>הוספת מילים</ion-label>
     </ion-segment-button>
+    <ion-segment-button value="upload">
+      <ion-label>הוספת מילים בקובץ</ion-label>
+    </ion-segment-button>
   </ion-segment>
 
   <div *ngIf="currentView === 'view'">
@@ -85,4 +88,20 @@
       </ion-item>
       <ion-button expand="block" (click)="addWord()">הוסף מילה</ion-button>
   </div>
+  <div *ngIf="currentView === 'upload'">
+    <ion-item>
+      <ion-label position="stacked">בחר קובץ JSON</ion-label>
+      <ion-input type="file" accept=".json" (change)="onFileSelected($event)"></ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="uploadFile()" [disabled]="!selectedFile">העלה קובץ</ion-button>
+    <ion-card *ngIf="selectedFile">
+      <ion-card-header>
+        <ion-card-title>קובץ נבחר</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{ selectedFile.name }}
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
 </ion-content>
