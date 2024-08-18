@@ -14,6 +14,8 @@
     <div class="top-bar">
       <span>ניקוד: {{score}}</span>
       <span>רמה: {{level}}</span>
+      <span>שאלה מספר {{currentWordIndex + 1}} מתוך {{totalWordsCount}}</span>
+  
       <span>הצלחות ברצף: {{getStreakEmoji()}}</span>
     </div>
 
@@ -43,7 +45,7 @@
       </ion-button>
     </div>
     
-    <ion-button (click)="resetGame()">התחל מחדש</ion-button>
+    <ion-button (click)="restartGame()">התחל מחדש</ion-button>
     <ion-progress-bar [value]="progress"></ion-progress-bar>
   </div>
 

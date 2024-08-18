@@ -12,16 +12,20 @@ import { AuthService } from '../services/authenticate/authService.service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
-
+  private excludedDomains = ['api.pexels.com'];
+  
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token = this.authService.getToken();
-    if (token) {
-      request = request.clone({
-        setHeaders: {
-          //Authorization: `Bearer ${token}`
-          'x-auth-token': `${token}`
-        }
-      });
+    
+    if (!this.excludedDomains.some(domain => request.url.includes(domain))) {
+      const token = this.authService.getToken();
+      if (token) {
+        request = request.clone({
+          setHeaders: {
+            //Authorization: `Bearer ${token}`
+            'x-auth-token': `${token}`
+          }
+        });
+      }
     }
     return next.handle(request);
   }

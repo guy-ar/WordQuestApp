@@ -1,0 +1,50 @@
+{
+  "words": [
+    {
+      "englishWord": "van",
+      "translations": [
+        {
+          "hebrew": "רכב גדול",
+          "isCorrect": true
+        },
+        {
+          "hebrew": "אוטובוס",
+          "isCorrect": false
+        },
+        {
+          "hebrew": "מכונית",
+          "isCorrect": false
+        },
+        {
+          "hebrew": "משאית",
+          "isCorrect": false
+        }
+      ],
+      "difficulty": 1,
+      "category": "תחבורה"
+    },
+    {
+      "englishWord": "magic",
+      "translations": [
+        {
+          "hebrew": "קסם",
+          "isCorrect": true
+        },
+        {
+          "hebrew": "כישוף",
+          "isCorrect": false
+        },
+        {
+          "hebrew": "אשליה",
+          "isCorrect": false
+        },
+        {
+          "hebrew": "פלא",
+          "isCorrect": false
+        }
+      ],
+      "difficulty": 2,
+      "category": "תופעות"
+    }
+  ]
+}

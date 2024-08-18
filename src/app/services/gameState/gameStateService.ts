@@ -8,6 +8,10 @@ export class GameStateService {
   private scoreSubject = new BehaviorSubject<number>(0);
   score$ = this.scoreSubject.asObservable();
 
+  private numberOfWordsSubject = new BehaviorSubject<number>(20); // Default to 20
+  numberOfWords$ = this.numberOfWordsSubject.asObservable();
+
+
   constructor() {}
 
   updateScore(score: number) {
@@ -20,5 +24,13 @@ export class GameStateService {
 
   resetScore() {
     this.scoreSubject.next(0);
+  }
+
+  updateNumberOfWords(numberOfWords: number) {
+    this.numberOfWordsSubject.next(numberOfWords);
+  }
+
+  getNumberOfWords(): number {
+    return this.numberOfWordsSubject.value;
   }
 }

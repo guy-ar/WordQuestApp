@@ -1,0 +1,189 @@
+{
+    "words": 
+    [
+        {
+            "englishWord": "orange",
+            "translations": [
+              {
+                "hebrew": "כתום",
+                "isCorrect": true
+              },
+              {
+                "hebrew": "צהוב",
+                "isCorrect": false
+              },
+              {
+                "hebrew": "אדום",
+                "isCorrect": false
+              },
+              {
+                "hebrew": "ירוק",
+                "isCorrect": false
+              }
+            ],
+            "difficulty": 1,
+            "category": "צבעים"
+          },
+          {
+            "englishWord": "Who has...?",
+            "translations": [
+              {
+                "hebrew": "למי יש...?",
+                "isCorrect": true
+              },
+              {
+                "hebrew": "מי אתה?",
+                "isCorrect": false
+              },
+              {
+                "hebrew": "מה זה?",
+                "isCorrect": false
+              },
+              {
+                "hebrew": "מתי זה?",
+                "isCorrect": false
+              }
+            ],
+            "difficulty": 1,
+            "category": "שאלות"
+          },
+          {
+            "englishWord": "chocolate",
+            "translations": [
+              {
+                "hebrew": "שוקולד",
+                "isCorrect": true
+              },
+              {
+                "hebrew": "עוגה",
+                "isCorrect": false
+              },
+              {
+                "hebrew": "ממתק",
+                "isCorrect": false
+              },
+              {
+                "hebrew": "גלידה",
+                "isCorrect": false
+              }
+            ],
+            "difficulty": 1,
+            "category": "מזון"
+          },
+          {
+            "englishWord": "children",
+            "translations": [
+              {
+                "hebrew": "ילדים",
+                "isCorrect": true
+              },
+              {
+                "hebrew": "תינוקות",
+                "isCorrect": false
+              },
+              {
+                "hebrew": "מבוגרים",
+                "isCorrect": false
+              },
+              {
+                "hebrew": "נשים",
+                "isCorrect": false
+              }
+            ],
+            "difficulty": 1,
+            "category": "אנשים"
+          },
+          {
+            "englishWord": "from",
+            "translations": [
+              {
+                "hebrew": "מ-",
+                "isCorrect": true
+              },
+              {
+                "hebrew": "ל-",
+                "isCorrect": false
+              },
+              {
+                "hebrew": "על",
+                "isCorrect": false
+              },
+              {
+                "hebrew": "תוך",
+                "isCorrect": false
+              }
+            ],
+            "difficulty": 1,
+            "category": "מילות יחס"
+          },
+          {
+            "englishWord": "send",
+            "translations": [
+              {
+                "hebrew": "לשלוח",
+                "isCorrect": true
+              },
+              {
+                "hebrew": "לקבל",
+                "isCorrect": false
+              },
+              {
+                "hebrew": "להביא",
+                "isCorrect": false
+              },
+              {
+                "hebrew": "לעזוב",
+                "isCorrect": false
+              }
+            ],
+            "difficulty": 1,
+            "category": "פועל"
+          },
+          {
+            "englishWord": "fly",
+            "translations": [
+              {
+                "hebrew": "לעוף",
+                "isCorrect": true
+              },
+              {
+                "hebrew": "ללכת",
+                "isCorrect": false
+              },
+              {
+                "hebrew": "לרוץ",
+                "isCorrect": false
+              },
+              {
+                "hebrew": "לזחול",
+                "isCorrect": false
+              }
+            ],
+            "difficulty": 1,
+            "category": "פועל"
+          },
+          {
+            "englishWord": "snake",
+            "translations": [
+              {
+                "hebrew": "נחש",
+                "isCorrect": true
+              },
+              {
+                "hebrew": "עכביש",
+                "isCorrect": false
+              },
+              {
+                "hebrew": "לטאה",
+                "isCorrect": false
+              },
+              {
+                "hebrew": "חולדה",
+                "isCorrect": false
+              }
+            ],
+            "difficulty": 1,
+            "category": "בעלי חיים"
+          }  
+    ]
+}      

@@ -1,0 +1,373 @@
+{
+    "words": 
+    [
+    {
+    "englishWord": "both",
+    "translations": [
+      {
+        "hebrew": "שניהם",
+        "isCorrect": true
+      },
+      {
+        "hebrew": "שלושתם",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "ארבעתם",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "חמישתם",
+        "isCorrect": false
+      }
+    ],
+    "difficulty": 1,
+    "category": "כמות"
+  },
+  {
+    "englishWord": "Sunday",
+    "translations": [
+      {
+        "hebrew": "יום ראשון",
+        "isCorrect": true
+      },
+      {
+        "hebrew": "יום שני",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "יום שלישי",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "יום רביעי",
+        "isCorrect": false
+      }
+    ],
+    "difficulty": 1,
+    "category": "ימים"
+  },
+  {
+    "englishWord": "Monday",
+    "translations": [
+      {
+        "hebrew": "יום שני",
+        "isCorrect": true
+      },
+      {
+        "hebrew": "יום ראשון",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "יום שלישי",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "יום רביעי",
+        "isCorrect": false
+      }
+    ],
+    "difficulty": 1,
+    "category": "ימים"
+  },
+  {
+    "englishWord": "Tuesday",
+    "translations": [
+      {
+        "hebrew": "יום שלישי",
+        "isCorrect": true
+      },
+      {
+        "hebrew": "יום שני",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "יום ראשון",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "יום רביעי",
+        "isCorrect": false
+      }
+    ],
+    "difficulty": 1,
+    "category": "ימים"
+  },
+  {
+    "englishWord": "Wednesday",
+    "translations": [
+      {
+        "hebrew": "יום רביעי",
+        "isCorrect": true
+      },
+      {
+        "hebrew": "יום חמישי",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "יום שישי",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "יום ראשון",
+        "isCorrect": false
+      }
+    ],
+    "difficulty": 1,
+    "category": "ימים"
+  },
+  {
+    "englishWord": "Thursday",
+    "translations": [
+      {
+        "hebrew": "יום חמישי",
+        "isCorrect": true
+      },
+      {
+        "hebrew": "יום רביעי",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "יום שישי",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "יום ראשון",
+        "isCorrect": false
+      }
+    ],
+    "difficulty": 1,
+    "category": "ימים"
+  },
+  {
+    "englishWord": "Friday",
+    "translations": [
+      {
+        "hebrew": "יום שישי",
+        "isCorrect": true
+      },
+      {
+        "hebrew": "יום חמישי",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "יום ראשון",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "יום שבת",
+        "isCorrect": false
+      }
+    ],
+    "difficulty": 1,
+    "category": "ימים"
+  },
+  {
+    "englishWord": "Saturday",
+    "translations": [
+      {
+        "hebrew": "יום שבת",
+        "isCorrect": true
+      },
+      {
+        "hebrew": "יום שישי",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "יום חמישי",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "יום ראשון",
+        "isCorrect": false
+      }
+    ],
+    "difficulty": 1,
+    "category": "ימים"
+  },
+  {
+    "englishWord": "home",
+    "translations": [
+      {
+        "hebrew": "בית",
+        "isCorrect": true
+      },
+      {
+        "hebrew": "משרד",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "חדר",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "מטבח",
+        "isCorrect": false
+      }
+    ],
+    "difficulty": 1,
+    "category": "מקומות"
+  },
+  {
+    "englishWord": "trip",
+    "translations": [
+      {
+        "hebrew": "טיול",
+        "isCorrect": true
+      },
+      {
+        "hebrew": "נסיעה",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "ריצה",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "שיט",
+        "isCorrect": false
+      }
+    ],
+    "difficulty": 1,
+    "category": "פעילויות"
+  },
+  {
+    "englishWord": "camp",
+    "translations": [
+      {
+        "hebrew": "מחנה",
+        "isCorrect": true
+      },
+      {
+        "hebrew": "טיול",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "מסע",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "חופשה",
+        "isCorrect": false
+      }
+    ],
+    "difficulty": 1,
+    "category": "מקומות"
+  },
+  {
+    "englishWord": "summer",
+    "translations": [
+      {
+        "hebrew": "קיץ",
+        "isCorrect": true
+      },
+      {
+        "hebrew": "חורף",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "סתיו",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "אביב",
+        "isCorrect": false
+      }
+    ],
+    "difficulty": 1,
+    "category": "עונות השנה"
+  },
+  {
+    "englishWord": "lake",
+    "translations": [
+      {
+        "hebrew": "אגם",
+        "isCorrect": true
+      },
+      {
+        "hebrew": "נהר",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "ים",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "מפל",
+        "isCorrect": false
+      }
+    ],
+    "difficulty": 1,
+    "category": "טבע"
+  },
+  {
+    "englishWord": "last",
+    "translations": [
+      {
+        "hebrew": "אחרון",
+        "isCorrect": true
+      },
+      {
+        "hebrew": "ראשון",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "שני",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "שלישי",
+        "isCorrect": false
+      }
+    ],
+    "difficulty": 1,
+    "category": "תכונות"
+  },
+  {
+    "englishWord": "go on a trip",
+    "translations": [
+      {
+        "hebrew": "לצאת לטיול",
+        "isCorrect": true
+      },
+      {
+        "hebrew": "לרוץ",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "לשחק",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "לישון",
+        "isCorrect": false
+      }
+    ],
+    "difficulty": 2,
+    "category": "פעילויות"
+  },
+  {
+    "englishWord": "at home",
+    "translations": [
+      {
+        "hebrew": "בבית",
+        "isCorrect": true
+      },
+      {
+        "hebrew": "במשרד",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "במטבח",
+        "isCorrect": false
+      },
+      {
+        "hebrew": "בחצר",
+        "isCorrect": false
+      }
+    ],
+    "difficulty": 1,
+    "category": "מקומות"
+  }
+]
+}

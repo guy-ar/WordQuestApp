@@ -4,22 +4,26 @@ import { Observable, Subject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { AddWordResponse, GetWordsResponse, UploadWordsResponse, Word, WordList } from 'src/app/model/words.model';
 import { environment } from 'src/environments/environment';
+import { GameStateService } from '../gameState/gameStateService';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class WordsService {
-  private wordList: Word[] = [];
+  private allWordsList: Word[] = [];
+  private  wordsList$ = new Subject<Word[] | null>();
+  public onWordsList$ = this.wordsList$.asObservable();
+
   private knownWords: Set<string> = new Set();
   private headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' })
 
   private addWordDetails$ = new Subject<AddWordResponse | null>();
   public onAddWordDetails$ = this.addWordDetails$.asObservable();
 
-  constructor(private http: HttpClient) {
-    this.loadWords();
-  }
+  constructor(private http: HttpClient,
+    private gameStateService: GameStateService
+  ) {}
 
   // private loadWords() {
   //   this.http.get<WordList>('assets/json/wordsList.json').subscribe(
@@ -32,7 +36,7 @@ export class WordsService {
     this.getWords() //this.selectedCategory, this.selectedDifficulty
       .subscribe({
         next: response => {
-          this.wordList = response.words;
+          this.allWordsList = response.words;
         },
         error: error => {
           console.error('Error fetching words:', error);
@@ -41,15 +45,35 @@ export class WordsService {
     });
   }
 
-  // addWord(newWord: {
-  //   englishWord: string;
-  //   translations: { hebrew: string; isCorrect: boolean }[];
-  //   difficulty: number;
-  //   category: string;
-  // }): Observable<any> {
-  //   return this.http.post(environment.apiUrl + 'words/add', newWord);
-  // }
-
+  loadRandomWords(category?: string, difficulty?: number) {
+    const quantity = this.gameStateService.getNumberOfWords();
+      let params: any = {};
+      if (category) params.category = category;
+      if (difficulty) params.difficulty = difficulty.toString();
+      if (quantity) params.quantity = quantity.toString();
+      
+      this.http.get<GetWordsResponse>(environment.apiUrl + 'words/random', { params })
+        .pipe(
+          tap(data => {
+            if (!data?.success) {
+              if (data?.message) {
+                console.error(data?.message); 
+              } else {
+                console.error("addWordService: Something went wrong"); 
+              }
+              this.wordsList$.next(null);
+            } else {
+              this.wordsList$.next(data?.words);
+            }
+          }),
+          catchError((err: HttpErrorResponse) => {
+            console.error(err);
+            this.addWordDetails$.next(null)
+            throw err;
+          })
+        ).subscribe();
+    
+  }
   getWords(category?: string, difficulty?: number): Observable<GetWordsResponse> {
     let params: any = {};
     if (category) params.category = category;
@@ -58,25 +82,22 @@ export class WordsService {
     return this.http.get<GetWordsResponse>(environment.apiUrl + 'words', { params });
   }
 
+  
+
   uploadWordsFile(formData: FormData): Observable<any> {
     return this.http.post<UploadWordsResponse>(environment.apiUrl + `words/upload`, formData);
   }
 
-  addWord(newWord: {
-    englishWord: string;
-    translations: { hebrew: string; isCorrect: boolean }[];
-    difficulty: number;
-    category: string;
-  }) {
+  addWord(newWord: Word) {
     const options = {
       headers: this.headers
     }
 
-    this.wordList.push(newWord);
+    this.allWordsList.push(newWord);
 
     // Here you would typically save the updated word list to your backend or local storage
     // For this example, we'll just log it to the console
-    console.log('Updated word list:', this.wordList);
+    console.log('Updated word list:', newWord);
     
     return this.http.post<AddWordResponse>(environment.apiUrl + 'words/add', newWord, options)
     .pipe(
@@ -99,47 +120,11 @@ export class WordsService {
     
   }
 
-  getRandomWord(): Word | undefined {
-    const unknownWords = this.wordList.filter(word => !this.knownWords.has(word.englishWord));
-    if (unknownWords.length === 0) return undefined;
-    const randomIndex = Math.floor(Math.random() * unknownWords.length);
-    return unknownWords[randomIndex];
-  }
-
-  getRandomWordsForGame(amount: number): Word[] {
-    const wordsForGame: Word[] = [];
-    for (let i = 0; i < amount; i++) {
-      const word = this.getRandomWord();
-      if (word) {
-        this.markWordAsKnown(word.englishWord);
-        wordsForGame.push(word);
-      }
-    }
-    return wordsForGame;
-  }
-
-  markWordAsKnown(word: string) {
-    this.knownWords.add(word);
-  }
-  
-
-  resetKnownWords() {
-    this.knownWords.clear();
-  }
-
-  getKnownWordsCount(): number {
-    return this.knownWords.size;
-  }
-
-  getTotalWordsCount(): number {
-    return this.wordList.length;
-  }
-
   getWordsByCategory(category: string): Word[] {
-    return this.wordList.filter(word => word.category === category);
+    return this.allWordsList.filter(word => word.category === category);
   }
 
   getWordsByDifficulty(difficulty: number): Word[] {
-    return this.wordList.filter(word => word.difficulty === difficulty);
+    return this.allWordsList.filter(word => word.difficulty === difficulty);
   }
 }

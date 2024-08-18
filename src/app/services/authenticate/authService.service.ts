@@ -61,6 +61,10 @@ export class AuthService {
     return this.currentUserEmailSubject.asObservable();
   }
 
+  getCurrentUserEmail(): string | null {
+    return this.currentUserEmailSubject.value;
+  }
+
   logout(): Promise<void> {
     // Implement logout logic here
     this.isAuthenticated = false;

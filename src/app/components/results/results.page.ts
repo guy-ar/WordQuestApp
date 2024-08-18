@@ -37,11 +37,11 @@ export class ResultsPage implements OnInit, OnDestroy {
   }
   calculateStars() {
     // This is a simple example. Adjust the logic based on your requirements
-    if (this.score >= 1500) {
+    if (this.score >= 150) {
       this.stars = [true, true, true];
-    } else if (this.score >= 1000) {
+    } else if (this.score >= 100) {
       this.stars = [true, true, false];
-    } else if (this.score >= 500) {
+    } else if (this.score >= 50) {
       this.stars = [true, false, false];
     } else {
       this.stars = [false, false, false];
