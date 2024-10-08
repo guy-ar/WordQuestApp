@@ -38,6 +38,10 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./components/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'score-board',
+    loadChildren: () => import('./components/score-board/score-board.module').then( m => m.ScoreBoardPageModule)
   }
 ];
 

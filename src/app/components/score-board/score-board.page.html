@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main-menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>לוח תוצאות</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>10 התוצאות הגבוהות</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>שם משתמש</ion-col>
+          <ion-col>תאריך ושעה</ion-col>
+          <ion-col>ניקוד</ion-col>
+          <ion-col>מילים נכונות</ion-col>
+          <ion-col>מילים לא נכונות</ion-col>
+          <ion-col>פרטים</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let result of topResults">
+          <ion-col>{{ result.userName }}</ion-col>
+          <ion-col>{{ result.createdAt | date:'yyyy-MM-dd HH:mm' }}</ion-col>
+          <ion-col>{{ result.score }}</ion-col>
+          <ion-col>{{ result.correctWords }}</ion-col>
+          <ion-col>{{ result.totalWords - result.correctWords }}</ion-col>
+          <ion-col>
+            <ion-button [routerLink]="['/game-details', result.id]" size="small">
+              פרטים
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

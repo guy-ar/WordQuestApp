@@ -13,13 +13,16 @@ import { Subscription } from 'rxjs';
 export class WordsPage  implements OnInit, OnDestroy {
 
   words: Word[] = [];
-  categories: string[] = ['Animals', 'Food', 'Technology', 'Sports']; // Add more categories as needed
-  difficulties: number[] = [1, 2, 3];
+  categories: string[] = []; 
+  
   selectedCategory: string = '';
   selectedDifficulty: number | undefined = undefined;
 
-  currentView: 'view' | 'add' | 'upload' = 'view';
+  currentView: 'view' | 'add' | 'upload' | 'edit' = 'view';
   selectedFile: File | null = null;
+
+  editingWord: Word | null = null;
+  isEditing = false;
 
   newWord: WordToAdd = { 
     englishWord: '',
@@ -44,6 +47,8 @@ export class WordsPage  implements OnInit, OnDestroy {
   ngOnInit() {
     this.onAddWords()
     this.loadWords();
+    this.loadCategories();
+    this.onUpdateWord();
   }
 
   loadWords() {
@@ -57,6 +62,42 @@ export class WordsPage  implements OnInit, OnDestroy {
           this.presentToast('שגיאה בטעינת המילים. נסה שוב מאוחר יותר.');
         }
       });
+    this.subscriptions.push(sub);
+  }
+
+  loadCategories() {
+    const sub = this.wordsService.geWordCategories()
+      .subscribe({
+        next: response => {
+          this.categories = response.categories;
+        },
+        error: error => {
+          console.error('Error fetching categories:', error);
+          this.presentToast('שגיאה בטעינת הקטגוריות. נסה שוב מאוחר יותר.');
+        }
+      });
+    this.subscriptions.push(sub);
+  }
+
+  onUpdateWord() {
+    const sub = this.wordsService.onUpdateWordDetails$
+      .subscribe({
+        next: (updateWordResponse) => {
+          if (updateWordResponse?.success) {
+            this.presentToast('המילה עודכנה בהצלחה');
+            this.loadWords();
+            this.isEditing = false;
+            this.editingWord = null;
+          } else {
+            this.presentToast('שגיאה בעדכון המילה');
+          }
+        },
+        error: (error) => {
+          console.error('Error updating word:', error);
+          this.presentToast('שגיאה בעדכון המילה. נסה שוב מאוחר יותר.');
+        }
+      });
+    
     this.subscriptions.push(sub);
   }
 
@@ -207,4 +248,27 @@ export class WordsPage  implements OnInit, OnDestroy {
     this.subscriptions.push(sub);
   }
 
+  startEditing(word: Word) {
+    this.editingWord = { ...word };
+    this.isEditing = true;
+    this.currentView = 'edit';
+  }
+
+  cancelEditing() {
+    this.editingWord = null;
+    this.isEditing = false;
+    this.currentView = 'view';
+  }
+
+  updateWord() {
+    if (!this.editingWord || !this.editingWord._id) {
+      this.presentToast('שגיאה בעדכון המילה');
+      return;
+    }
+
+    const sub = this.wordsService.updateWord(this.editingWord._id, this.editingWord)
+      .subscribe();
+    
+    this.subscriptions.push(sub);
+  }
 }

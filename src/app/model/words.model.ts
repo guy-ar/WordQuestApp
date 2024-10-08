@@ -6,6 +6,7 @@ export interface Translation {
   }
   
 export interface Word {
+  _id?: string;
   englishWord: string;
   translations: Translation[];
   difficulty: number;
@@ -46,4 +47,13 @@ export interface UploadResult {
 export interface UploadError {
   couse: string
   errorMsg?: string
+}
+
+export interface GetCategoriesResponse extends GeneralResponse{
+  count: number;
+  categories: string[] 
+}
+
+export interface UpdateWordResponse extends GeneralResponse {
+  word: Word;
 }

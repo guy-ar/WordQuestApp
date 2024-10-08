@@ -33,7 +33,7 @@ export class MainMenuPage implements OnInit {
   }
 
   navigateToScoreboard() {
-    this.router.navigate(['/scoreboard']);
+    this.router.navigate(['/score-board']);
   }
 
   navigateToWords() {

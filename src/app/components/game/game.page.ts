@@ -146,11 +146,11 @@ export class GamePage implements OnInit {
     
     const wordResults = this.gameResultService.transferWordsToWordResults(this.gameKnownWords, this.failedWords);
       const gameResultIn: CreateGameResultRequest = {
+        userEmail: this.authService.getCurrentUserEmail()!,
         score: this.score,
-        correctWords: this.knownWordsCount,
         totalWords: this.totalWordsCount,
-        wordResults: wordResults,
-        userEmail: this.authService.getCurrentUserEmail()!
+        correctWords: this.knownWordsCount,
+        wordResults: wordResults
       }
       this.gameResultService.createGameResult(gameResultIn);
       
@@ -197,7 +197,7 @@ export class GamePage implements OnInit {
     if (translation.isCorrect) {
       this.gameKnownWords.push(this.currentWord!);
       this.knownWordsCount++;
-      this.progress = (this.currentWordIndex + 1/ this.totalWordsCount);
+      this.progress = (this.currentWordIndex / this.totalWordsCount);
       this.score += 10;
       this.streak++;
       this.presentToast('כל הכבוד! קיבלת 10 נקודות', 3000);

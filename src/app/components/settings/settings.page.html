@@ -12,5 +12,16 @@
     <ion-label position="floating">מספר מילים למשחק</ion-label>
     <ion-input type="number" [(ngModel)]="numberOfWords" min="1" max="100"></ion-input>
   </ion-item>
-  <ion-button expand="block" (click)="updateNumberOfWords()">עדכן הגדרות</ion-button>
+  <ion-item>
+    <ion-label>קטגוריה</ion-label>
+    <ion-select [(ngModel)]="selectedCategory">
+      <ion-select-option value="">הכל</ion-select-option>
+      <ion-select-option *ngFor="let category of categories" [value]="category">{{category}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">שיעור/רמת קושי למשחק</ion-label>
+    <ion-input type="number" [(ngModel)]="selectedDifficulty" min="1" max="100"></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="updateDefinitions()">עדכן הגדרות</ion-button>
 </ion-content>

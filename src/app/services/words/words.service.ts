@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { AddWordResponse, GetWordsResponse, UploadWordsResponse, Word, WordList } from 'src/app/model/words.model';
+import { AddWordResponse, GetCategoriesResponse, GetWordsResponse, UpdateWordResponse, UploadWordsResponse, Word, WordList } from 'src/app/model/words.model';
 import { environment } from 'src/environments/environment';
 import { GameStateService } from '../gameState/gameStateService';
 
@@ -20,6 +20,9 @@ export class WordsService {
 
   private addWordDetails$ = new Subject<AddWordResponse | null>();
   public onAddWordDetails$ = this.addWordDetails$.asObservable();
+
+  private updateWordDetails$ = new Subject<UpdateWordResponse | null>();
+  public onUpdateWordDetails$ = this.updateWordDetails$.asObservable();
 
   constructor(private http: HttpClient,
     private gameStateService: GameStateService
@@ -45,8 +48,13 @@ export class WordsService {
     });
   }
 
-  loadRandomWords(category?: string, difficulty?: number) {
+  loadRandomWords() {
     const quantity = this.gameStateService.getNumberOfWords();
+    let category:string | undefined = this.gameStateService.getSelectedCategory();
+    if (category === 'הכל') {
+      category = undefined;
+    }
+    let difficulty: number | undefined = this.gameStateService.getSelectedDifficulty();
       let params: any = {};
       if (category) params.category = category;
       if (difficulty) params.difficulty = difficulty.toString();
@@ -81,8 +89,6 @@ export class WordsService {
     
     return this.http.get<GetWordsResponse>(environment.apiUrl + 'words', { params });
   }
-
-  
 
   uploadWordsFile(formData: FormData): Observable<any> {
     return this.http.post<UploadWordsResponse>(environment.apiUrl + `words/upload`, formData);
@@ -120,11 +126,36 @@ export class WordsService {
     
   }
 
+  updateWord(wordId: string, updatedWord: Word): Observable<UpdateWordResponse> {
+    const options = {
+      headers: this.headers
+    };
+
+    return this.http.put<UpdateWordResponse>(`${environment.apiUrl}words/${wordId}`, updatedWord, options)
+      .pipe(
+        tap(data => {
+          if (!data?.success) {
+            console.error(data?.message || "updateWordService: Something went wrong");
+          }
+          this.updateWordDetails$.next(data?.success === true ? data : null);
+        }),
+        catchError((err: HttpErrorResponse) => {
+          console.error(err);
+          this.updateWordDetails$.next(null);
+          throw err;
+        })
+      );
+  }
+
   getWordsByCategory(category: string): Word[] {
     return this.allWordsList.filter(word => word.category === category);
   }
 
   getWordsByDifficulty(difficulty: number): Word[] {
     return this.allWordsList.filter(word => word.difficulty === difficulty);
+  }
+
+  geWordCategories(): Observable<GetCategoriesResponse> {
+    return this.http.get<GetCategoriesResponse>(environment.apiUrl + 'words/categories');
   }
 }
