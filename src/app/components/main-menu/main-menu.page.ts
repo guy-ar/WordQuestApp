@@ -20,6 +20,9 @@ export class MainMenuPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['loggedIn'] === 'true') {
         this.isLoggedIn = this.authService.IsAuthenticated
+        if (this.isLoggedIn) {
+          this.username = this.authService.getUserName() || '';
+        }
       }
     });
   }

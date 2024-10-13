@@ -7,6 +7,7 @@ export interface AuthRequest {
 
 export interface AuthResponse extends GeneralResponse {
     token: string
+    userName?: string
 }
 
 export interface RegiaterUserRequest extends AuthRequest {

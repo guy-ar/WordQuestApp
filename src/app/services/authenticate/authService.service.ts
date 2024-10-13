@@ -33,6 +33,10 @@ export class AuthService {
             if (data.success) {
                 this.isAuthenticated = true;
                 this.setToken(data.token);
+                if (data.userName) {
+                  this.setUserName(data.userName)
+                }
+                
                 //this.isAuthenticatedSubject.next(true);
                 this.currentUserEmailSubject.next(credentials.email);
             }
@@ -69,6 +73,7 @@ export class AuthService {
     // Implement logout logic here
     this.isAuthenticated = false;
     this.removeToken();
+    this.removeUserName();
     //this.isAuthenticatedSubject.next(false);
     this.currentUserEmailSubject.next(null);
     return Promise.resolve();
@@ -84,5 +89,17 @@ export class AuthService {
 
   private removeToken(): void {
     sessionStorage.removeItem(this.tokenKey);
+  }
+
+  private setUserName(userName: string): void {
+    sessionStorage.setItem('userName', userName);
+  }
+
+  getUserName(): string | null {
+    return sessionStorage.getItem('userName');
+  }
+
+  private removeUserName(): void {
+    sessionStorage.removeItem('userName');
   }
 }
