@@ -14,6 +14,7 @@ export class LoginPage implements OnInit, OnDestroy {
   username: string = '';
   password: string = '';
   authSubscription?: Subscription
+  isLoginProcessing = false;
 
   constructor(
     private authService: AuthService,
@@ -36,10 +37,12 @@ export class LoginPage implements OnInit, OnDestroy {
           email: this.username,
           password: this.password
         }
+        this.isLoginProcessing = true;
         this.authSubscription = this.authService.login(authRequest)
           .subscribe({
             next: (data) => {
               if (data?.success) {
+                this.isLoginProcessing = false;
                 setTimeout(() => this.router.navigate(['/'],  { queryParams: { loggedIn: 'true' } } ) , 200);
 
                 //this.router.navigate(['/']);

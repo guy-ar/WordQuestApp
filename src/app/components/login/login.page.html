@@ -19,6 +19,10 @@
     </ion-item>
     <ion-button expand="block" type="submit" class="ion-margin-top">התחבר</ion-button>
   </form>
+  <ion-item *ngIf="isLoginProcessing">
+    <ion-label>מנסה להתחבר</ion-label>
+    <ion-spinner name="bubbles"></ion-spinner>
+  </ion-item>
   <ion-text color="medium" class="ion-text-center ion-margin-top">
     <h6>אין לך חשבון? <a routerLink="/register">הירשם כאן</a></h6>
   </ion-text>
